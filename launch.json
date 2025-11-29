@@ -1,0 +1,98 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Python Debugger: Current File",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "${file}",
+            "console": "integratedTerminal"
+        },        python - <<'PY'
+        import os, importlib.util
+        print("GEMINI env set:", bool(os.getenv("GEMINI_API_KEY")))
+        print("google.genai installed:", bool(importlib.util.find_spec("google.genai")))
+        PY        python - <<'PY'
+        import os, importlib
+        genai = importlib.import_module("google.genai")
+        client = genai.Client(api_key=os.getenv("GEMINI_API_KEY"))
+        print("Client created:", bool(client))
+        PY        {
+            // ...existing configs...
+            "configurations": [
+                {
+                    "name": "Python Debugger: Flask",
+                    "type": "debugpy",
+                    "request": "launch",
+                    "module": "flask",
+                    "env": {
+                        "FLASK_APP": "app.py",
+                        "FLASK_DEBUG": "1",
+                        "GEMINI_API_KEY": "${env:GEMINI_API_KEY}"
+                    },
+                    "args": [
+                        "run",
+                        "--no-debugger",
+                        "--no-reload"
+                    ],
+                    "jinja": true,
+                    "autoStartBrowser": false
+                },
+                // ...other configs...
+            ]
+        {
+            "name": "Python Debugger: Flask",
+            "type": "debugpy",
+            "request": "launch",
+            "module": "flask",
+            "env": {
+                "FLASK_APP": "app.py",
+                "FLASK_DEBUG": "1"
+            },
+            "args": [
+                "run",
+                "--no-debugger",
+                "--no-reload"
+            ],
+            "jinja": true,
+            "autoStartBrowser": false
+        },
+        {
+            "name": "Python Debugger: Current File",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "${file}",
+            "console": "integratedTerminal"
+        },
+        {
+            "name": "Python Debugger: Current File",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "${file}",
+            "console": "integratedTerminal"
+        },
+        {
+            "name": "Python Debugger: Current File",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "${file}",
+            "console": "integratedTerminal"
+        },
+        {
+            "name": "Launch Chrome",
+            "request": "launch",
+            "type": "chrome",
+            "url": "http://localhost:8080",
+            "webRoot": "${workspaceFolder}"
+        },
+        {
+            "type": "chrome",
+            "request": "launch",
+            "name": "Launch Chrome against localhost",
+            "url": "http://localhost:8080",
+            "webRoot": "${workspaceFolder}"
+        }
+    ]
+}

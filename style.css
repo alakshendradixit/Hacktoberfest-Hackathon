@@ -1,0 +1,241 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+  background-color: #f9fafb;
+  color: #333;
+  line-height: 1.6;
+  font-size: 16px;
+  padding: 20px;
+}
+
+/* Container */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 15px;
+}
+
+/* Header */
+header {
+  text-align: center;
+  padding: 40px 0 20px;
+  background-color: #4CAF50;
+  color: white;
+  border-radius: 8px;
+  margin-bottom: 40px;
+}
+
+header h1 {
+  font-size: 2.4rem;
+  font-weight: 700;
+  margin-bottom: 6px;
+}
+
+header p {
+  font-size: 1.2rem;
+  margin-top: 10px;
+  font-weight: 300;
+}
+
+/* Navigation (if needed) */
+nav ul {
+  list-style: none;
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+  margin-bottom: 40px;
+}
+
+nav ul li a {
+  color: #4CAF50;
+  text-decoration: none;
+  font-weight: 600;
+  transition: color 0.3s ease;
+}
+
+nav ul li a:hover {
+  color: #357a38;
+}
+
+/* Cards for nutritional info or AI results */
+.card {
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+  padding: 20px;
+  margin-bottom: 30px;
+  transition: transform 0.3s ease;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+}
+
+.card h2 {
+  color: #4CAF50;
+  margin-bottom: 15px;
+  font-weight: 700;
+}
+
+.card p {
+  color: #555;
+  font-size: 1rem;
+}
+
+/* Buttons */
+button, .btn {
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  padding: 12px 25px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: background-color 0.2s ease, transform 0.08s ease;
+  display: inline-block;
+  text-align: center;
+  text-decoration: none;
+}
+
+button:hover, .btn:hover {
+  background-color: #3e8e41;
+}
+
+button:active, .btn:active {
+  transform: translateY(1px);
+}
+
+button.secondary, .btn.secondary {
+  background: #efefef;
+  color: #333;
+  border: 1px solid #ddd;
+}
+
+/* Forms */
+.form-row {
+  display: flex;
+  gap: 15px;
+  align-items: center;
+  flex-wrap: wrap;
+  margin-bottom: 15px;
+}
+
+input[type="text"], input[type="file"], textarea, select {
+  width: 100%;
+  padding: 10px 12px;
+  border-radius: 8px;
+  border: 1px solid #e1e1e1;
+  background: #fff;
+  font-size: 1rem;
+  color: #333;
+}
+
+label {
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 6px;
+  display: block;
+}
+
+/* Image preview */
+.preview {
+  display: inline-block;
+  max-width: 220px;
+  max-height: 220px;
+  overflow: hidden;
+  border-radius: 8px;
+  border: 1px solid #e6e6e6;
+  background: #fff;
+  padding: 6px;
+}
+
+.preview img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* Results / Recipes formatting */
+.results {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 20px;
+}
+
+.recipe {
+  background: linear-gradient(180deg, #ffffff 0%, #fbfffb 100%);
+  border-left: 4px solid #4CAF50;
+  padding: 18px;
+  border-radius: 10px;
+}
+
+.recipe h3 {
+  margin-bottom: 10px;
+  color: #2e7d32;
+  font-size: 1.25rem;
+}
+
+.recipe ul {
+  margin: 8px 0 12px 18px;
+  color: #444;
+}
+
+.recipe b {
+  color: #333;
+}
+
+/* Warning / Message styles */
+.warning {
+  background: #fff7e6;
+  color: #7a4a00;
+  border: 1px solid #ffe6a7;
+  padding: 10px 12px;
+  border-radius: 8px;
+  margin-bottom: 12px;
+}
+
+/* Footer */
+footer {
+  text-align: center;
+  margin-top: 40px;
+  color: #888;
+  font-size: 0.9rem;
+}
+
+/* Responsive */
+@media (min-width: 720px) {
+  .form-row {
+    flex-wrap: nowrap;
+  }
+
+  .results {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1100px) {
+  header h1 {
+    font-size: 3.6rem;
+  }
+
+  .results {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/* Small tweaks */
+.hidden {
+  display: none;
+}
+.copy-btn {
+  margin-left: 10px;
+  font-size: 0.9rem;
+  padding: 8px 12px;
+}
+
+/* End of file */

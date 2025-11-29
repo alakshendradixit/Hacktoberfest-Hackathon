@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Nutrition AI</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  <style>
+    .error-message {
+      color: red;
+      margin: 15px 0;
+      font-weight: bold;
+    }
+    .uploaded-img {
+      max-width: 300px;
+      margin: 15px 0;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+    .ai-result {
+      background: #fff;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+      margin-top: 20px;
+      white-space: normal;
+    }
+    .ai-result ul {
+      list-style-type: disc;
+      margin-left: 20px;
+    }
+    .ai-result h3, .ai-result h4 {
+      color: #4CAF50;
+      margin-top: 15px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Nutrition AI</h1>
+
+    {% if error %}
+      <div class="error-message">{{ error }}</div>
+    {% endif %}
+
+    {% if page == 'add' %}
+      <!-- Main input form -->
+      <form action="{{ url_for('index') }}" method="POST" enctype="multipart/form-data">
+        <label for="food_name">Food Name (optional):</label>
+        <input type="text" id="food_name" name="food_name" value="{{ request.form.food_name or '' }}" placeholder="Enter food, fruit, or meal">
+
+        <label for="food_image">Upload image (optional):</label>
+        <input type="file" id="food_image" name="food_image" accept="image/*">
+
+        <button type="submit">Submit</button>
+      </form>
+
+    {% elif page == 'select_meal_type' %}
+      <!-- Meal type selection form -->
+      <h2>Which type of meal do you want for "{{ food_name }}"?</h2>
+      <form action="{{ url_for('generate_meal') }}" method="POST" enctype="multipart/form-data">
+        <input type="hidden" name="food_name" value="{{ food_name }}">
+
+        <label for="food_image">Upload image:</label>
+        <input type="file" id="food_image" name="food_image" accept="image/*" {% if not filename %}required{% endif %}>
+
+        <label for="meal_type">Meal Type:</label>
+        <select id="meal_type" name="meal_type" required>
+          <option value="high protein">High Protein</option>
+          <option value="high fibre">High Fibre</option>
+          <option value="weight gain">Weight Gain</option>
+          <option value="weight loss">Weight Loss</option>
+        </select>
+
+        <button type="submit">Generate Recipes</button>
+      </form>
+
+    {% elif page == 'history' %}
+      <!-- Chat history display -->
+      <h2>Chat History</h2>
+      {% for chat in chats %}
+        <div class="chat-entry">
+          <h3>{{ chat.food_name }}</h3>
+          <p><a href="{{ url_for('chat_detail', chat_id=chat.id) }}">View Details</a></p>
+        </div>
+      {% else %}
+        <p>No chats available.</p>
+      {% endfor %}
+
+    {% elif page == 'view' %}
+      <!-- Detailed chat view -->
+      <h2>Chat Details for {{ chat.food_name }}</h2>
+      {% if chat.image_filename %}
+        <img src="{{ url_for('static', filename='uploads/' ~ chat.image_filename) }}" alt="{{ chat.food_name }}" class="uploaded-img" />
+      {% endif %}
+      <div class="ai-result">{{ chat.result | safe }}</div>
+      <p><a href="{{ url_for('history') }}">Back to History</a></p>
+
+    {% elif page == 'edit' %}
+      <!-- Edit chat form -->
+      <h2>Edit Chat</h2>
+      <form action="{{ url_for('edit_chat', chat_id=chat.id) }}" method="POST" enctype="multipart/form-data">
+        <label for="food_name">Food Name:</label>
+        <input type="text" id="food_name" name="food_name" value="{{ chat.food_name }}">
+
+        <label for="food_image">Change Image (optional):</label>
+        <input type="file" id="food_image" name="food_image" accept="image/*">
+
+        <button type="submit">Save</button>
+      </form>
+    {% endif %}
+  </div>
+
+  <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
